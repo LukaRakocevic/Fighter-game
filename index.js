@@ -26,8 +26,9 @@ class Sprite {
     
  }
 
- this.color = color
+    this.color = color
     this.isAttacking = false
+    this.health = 100;
     }
 
 
@@ -168,7 +169,8 @@ function animate (){
             player.isAttacking
             ){
             player.isAttacking = false
-            document.querySelector('#enemyHealth').style.width = '10%'
+            enemy.health -= 10
+            document.querySelector('#enemyHealth').style.width = enemy.health + '%'
         }
 
         if(rectangularCollision({
