@@ -39,9 +39,36 @@ const player = new Fighter ({
         x:0,
         y:0
     },
-
-
-})
+    imageSrc: './oak_woods_v1.0/samuraiMack/idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset:{x:215, y:157
+    },
+    sprites:{
+        idle:{
+            imageSrc: './oak_woods_v1.0/samuraiMack/idle.png',
+            framesMax: 8
+        },
+        Run:{
+            imageSrc: './oak_woods_v1.0/samuraiMack/Run.png',
+            framesMax: 8,
+        },
+        jump:{
+            imageSrc: './oak_woods_v1.0/samuraiMack/Jump.png',
+            framesMax: 2,
+        },
+        fall:{
+            imageSrc: './oak_woods_v1.0/samuraiMack/Fall.png',
+            framesMax: 2,
+        },
+        attack1:{
+            imageSrc: './oak_woods_v1.0/samuraiMack/Attack1.png',
+            framesMax: 6,
+        },
+    }
+}
+    
+)
 
 const enemy = new Fighter ({
     position: {
@@ -57,6 +84,33 @@ const enemy = new Fighter ({
         x:-50,
         y:0
     },
+    imageSrc: './oak_woods_v1.0/kenji/idle.png',
+    framesMax: 4,
+    scale: 2.5,
+    offset:{x:215, y:157
+    },
+    sprites:{
+        idle:{
+            imageSrc: './oak_woods_v1.0/kenji/idle.png',
+            framesMax: 4
+        },
+        Run:{
+            imageSrc: './oak_woods_v1.0/kenji/Run.png',
+            framesMax: 8,
+        },
+        jump:{
+            imageSrc: './oak_woods_v1.0/kenji/Jump.png',
+            framesMax: 2,
+        },
+        fall:{
+            imageSrc: './oak_woods_v1.0/kenji/Fall.png',
+            framesMax: 2,
+        },
+        attack1:{
+            imageSrc: './oak_woods_v1.0/kenji/Attack1.png',
+            framesMax: 4,
+        },
+    }
 
 })
 
@@ -95,20 +149,36 @@ function animate (){
     background.update()
     shop.update()
     player.update()
-    enemy.update()
-
-
+  
     //vuce iz const keys objekte, bitno za smoother left-right akciju
     //da bi se izbegao problem kao sto je u mugen-u
     player.velocity.x = 0;//bez ovoga player bi isao zauvek u jednom smeru, ovo je default value za velocity
-    enemy.velocity.x = 0; //za enemy-ja moramo imati isto kao za player-a
-    if (keys.a.pressed && player.lastKey === 'a'){     //<======= PLAYER movement
+    enemy.velocity.x = 0;
+
+    
+    if (keys.a.pressed && player.lastKey === 'a'){    
+         //<======= PLAYER movement
         player.velocity.x = -8
+        player.switchSprite('run')
     }
     else if (keys.d.pressed && player.lastKey === 'd'){
-        player.velocity.x = 8}
+        player.velocity.x = 8
+        player.switchSprite('run')
+    }
+    else {
+        player.switchSprite('idle')
+    }
+    //jumping
+    if(player.velocity.y <0){
+        player.switchSprite('jump')
+    }
+    //player.velocity.y >0 means falling!
+    else if (player.velocity.y >0){
+        player.switchSprite('fall')
+    }
 //....................
-        if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){     //<======= ENEMY movement
+        if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){    
+         //<======= ENEMY movement
             enemy.velocity.x = -8
         }
         else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
