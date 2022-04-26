@@ -217,16 +217,16 @@ function animate (){
 
 
 //<======= ENEMY movement
-        if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){    
-            enemy.velocity.x = -8
-            enemy.switchSprite('run')
-        }
-        else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
-            enemy.velocity.x = 8
-            enemy.switchSprite('run')
-        } else {
-            enemy.switchSprite('idle')
-        }
+    if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){    
+           enemy.velocity.x = -8
+           enemy.switchSprite('run')
+       }
+    else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
+           enemy.velocity.x = 8
+           enemy.switchSprite('run')
+    } else {
+           enemy.switchSprite('idle')
+    }
     //jumping
     if(enemy.velocity.y <0){
         enemy.switchSprite('jump')
@@ -245,11 +245,11 @@ function animate (){
             player.isAttacking && 
             player.framesCurrent === 4
             ){
-                enemy.takeHit()
+             enemy.takeHit()
              player.isAttacking = false
              
-                          gsap.to('#enemyHealth', {
-                 width: enemy.health + '%'
+             gsap.to('#enemyHealth', {
+            width: enemy.health + '%'
              })
         }
 
@@ -274,11 +274,10 @@ function animate (){
             })
         }
 
-                //if player? misses
-                if (enemy.isAttacking && enemy.framesCurrent ===2) {
-                   
-                    enemy.isAttacking = false
-                }
+         //if player? misses
+         if (enemy.isAttacking && enemy.framesCurrent ===2) {
+          enemy.isAttacking = false
+            }
 
         //end game based on health
         if (enemy.health <= 0 || player.health <=0){
@@ -302,15 +301,13 @@ window.addEventListener('keydown', (event)=>{
             keys.d.pressed = true;
             player.lastKey = 'd';
            break
-
           case 'a':
             keys.a.pressed = true;
             player.lastKey = 'a';
           break   
-
                case 'w':
             player.velocity.y = -16 //skakanje
-            player.lastKey = 'w';
+           
                break   
             case ' ':
             player.attack();
@@ -323,17 +320,14 @@ window.addEventListener('keydown', (event)=>{
             keys.ArrowLeft.pressed = true;
             enemy.lastKey = 'ArrowLeft';
         break;
-
         case 'ArrowRight':
             keys.ArrowRight.pressed = true;
             enemy.lastKey = 'ArrowRight';
         break; 
-
         case 'ArrowUp':
             enemy.velocity.y = -16 //skakanje
-            enemy.lastKey = 'ArrowUp';
+            
         break;  
-
         case 'Control':
             enemy.attack();
         break;
@@ -353,11 +347,7 @@ window.addEventListener('keyup', (event)=>{
             keys.a.pressed = false;
         break
 
-        case 'w':
-            keys.a.pressed = false;
-        break //do I need this??????
-
-
+   
         case 'ArrowRight':
             keys.ArrowRight.pressed = false;; //pustanjem "d" prestaje da se krece
         break
@@ -366,7 +356,7 @@ window.addEventListener('keyup', (event)=>{
             keys.ArrowLeft.pressed = false;
         break
     }
-    console.log(event);
+    
 })
 
 
